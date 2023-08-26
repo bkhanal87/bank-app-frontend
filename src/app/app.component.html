@@ -1,14 +1,19 @@
 <!-- add header -->
 
-<nav class="navbar navbar-expand-sm navbar-dark bg-primary">
+<nav class="navbar navbar-expand-sm navbar-dark bg-dark justify-content-between">
     <ul class="navbar-nav">
         <li class="nav-item">
             <a routerLink="users" routerLinkActive="active" class="nav-link">User List</a>
+        </li>
+        <li class="nav-item">
+            <a routerLink="create-user" routerLinkActive="active" class="nav-link">Add User</a>
         </li>
     </ul>
 </nav>
 
 <h1 class="text-center"> {{ title }} </h1>
+
+
 <div class="container">
     <router-outlet></router-outlet>
 </div>
@@ -17,6 +22,6 @@
 
 <footer class="footer">
     <div class="container">
-        <span>All Rights Reserved</span>
+        <span>Copyright @ 2023. All Rights Reserved. </span>
     </div>
 </footer>
