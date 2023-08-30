@@ -6,6 +6,7 @@
         <th scope="col">Name</th>
         <th scope="col">Address</th>
         <th scope="col">Phone #</th>
+        <th scope="col">Actions</th>
       </tr>
     </thead>
     <tbody>
@@ -14,7 +15,21 @@
         <td>{{ user.name }}</td>
         <td>{{ user. address }}</td>
         <td>{{ user.phoneNumber }}</td>
+        <td>
+          <button (click)="updateUser(user.id)" 
+          class="btn btn-info">
+              Update
+          </button>
+          <br/>
+          <button (click)="deleteUser(user.id)" 
+          class="btn btn-danger" style="margin-left: 10px">
+              Delete
+          </button>
+          <button (click)="userDetails(user.id)" 
+          class="btn btn-info">
+              Details
+          </button>
+        </td>
       </tr>
-
     </tbody>
   </table>
