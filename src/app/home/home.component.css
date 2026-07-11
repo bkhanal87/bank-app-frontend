@@ -1,0 +1,61 @@
+.home-container {
+  padding: 40px;
+}
+
+
+.hero {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+
+.hero h1 {
+  font-size: 36px;
+  color: #1a237e;
+}
+
+
+.hero p {
+  font-size: 18px;
+  color: #555;
+}
+
+
+.dashboard-cards {
+  display: flex;
+  justify-content: center;
+  gap: 25px;
+  flex-wrap: wrap;
+}
+
+
+.card {
+  width: 280px;
+  padding: 25px;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0px 4px 12px rgba(0,0,0,0.15);
+  text-align: center;
+}
+
+
+.card h2 {
+  color: #1a237e;
+}
+
+
+.card button {
+  margin-top: 20px;
+  padding: 12px 25px;
+  border: none;
+  border-radius: 6px;
+  background: #1a237e;
+  color: white;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+
+.card button:hover {
+  background: #303f9f;
+}
