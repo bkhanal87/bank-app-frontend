@@ -5,25 +5,32 @@ import { CreateUserComponent } from './create-user/create-user.component';
 import { UpdateUserComponent } from './update-user/update-user.component';
 import { DeleteUserComponent } from './delete-user/delete-user.component';
 import { UserDetailsComponent } from './user-details/user-details.component';
+import { HomeComponent } from './home/home.component';
+import { NavbarComponent } from './navbar/navbar.component'; // Not used in routes, but AppModule will declare it
+import { AccountsComponent } from './accounts/accounts.component';
+import { TransfersComponent } from './transfers/transfers.component';
+import { TransactionsComponent } from './transactions/transactions.component';
 
 // this is where we add our routes
 const routes: Routes = [
-  {path: 'users', component: UserListComponent},
 
-  // route to create user
-  {path: 'create-user', component: CreateUserComponent},
+  // Home page
+  { path: '', component: HomeComponent },
 
-  // route to redirect from empty path to users
-  {path: '', redirectTo: 'users', pathMatch: 'full'},
+  // Banking pages
+  { path: 'accounts', component: AccountsComponent },
+  { path: 'transfers', component: TransfersComponent },
+  { path: 'transactions', component: TransactionsComponent },
 
-  // route to update user
-  {path: 'update-user/:id', component:UpdateUserComponent},
+  // Admin pages (your existing CRUD)
+  { path: 'users', component: UserListComponent },
+  { path: 'create-user', component: CreateUserComponent },
+  { path: 'update-user/:id', component: UpdateUserComponent },
+  { path: 'delete-user/:id', component: DeleteUserComponent },
+  { path: 'user-details/:id', component: UserDetailsComponent },
 
-  // route to delete user
-  {path: 'delete-user/:id', component:DeleteUserComponent},
-
-  // route for user details
-  {path: 'user-details/:id', component:UserDetailsComponent}
+  // Catch-all
+  { path: '**', redirectTo: '', pathMatch: 'full' }
 
 ];
 
