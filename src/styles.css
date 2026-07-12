@@ -1,7 +1,32 @@
 /* You can add global styles to this file, and also import other style files */
 /* add global bootstrap library to our project */
-@import "~bootstrap/dist/css/bootstrap.min.css" 
+@import "~bootstrap/dist/css/bootstrap.min.css"; 
 
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+body {
+    background-color: #f5f7fa;
+}
+
+.navbar {
+    box-shadow: 0 2px 8px rgba(0,0,0,.15);
+}
+
+.navbar-brand {
+    font-size: 1.4rem;
+    font-weight: bold;
+}
+
+.nav-link {
+    font-weight: 500;
+    margin-right: 10px;
+}
+
+.nav-link:hover {
+    color: #ffd54f !important;
+}
+
+.footer {
+    margin-top: 50px;
+    padding: 20px;
+    color: gray;
+}
