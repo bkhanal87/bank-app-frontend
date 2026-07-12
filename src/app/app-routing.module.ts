@@ -6,7 +6,6 @@ import { UpdateUserComponent } from './update-user/update-user.component';
 import { DeleteUserComponent } from './delete-user/delete-user.component';
 import { UserDetailsComponent } from './user-details/user-details.component';
 import { HomeComponent } from './home/home.component';
-import { NavbarComponent } from './navbar/navbar.component'; // Not used in routes, but AppModule will declare it
 import { AccountsComponent } from './accounts/accounts.component';
 import { TransfersComponent } from './transfers/transfers.component';
 import { TransactionsComponent } from './transactions/transactions.component';
