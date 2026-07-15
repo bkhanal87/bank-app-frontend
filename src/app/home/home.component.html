@@ -1,39 +1,82 @@
-<div class="home-container">
+<div class="hero">
 
-  <section class="hero">
     <h1>Welcome to MyBank</h1>
-    <p>Securely manage your finances anytime, anywhere.</p>
-  </section>
 
+    <p class="lead">
+        Securely manage your finances.
+    </p>
 
-  <section class="dashboard-cards">
+</div>
 
-    <div class="card">
-      <h2>Check Balance</h2>
-      <p>View your account balances.</p>
-      <button routerLink="/accounts">
-        View Accounts
-      </button>
+<div class="row">
+
+    <div class="col-md-4 mb-4">
+
+        <div class="card action-card shadow">
+
+            <div class="card-body text-center">
+
+                <div class="action-icon">💰</div>
+
+                <h4>Check Balance</h4>
+
+                <p>View your account balances.</p>
+
+                <a routerLink="/accounts"
+                   class="btn btn-primary">
+                    Go
+                </a>
+
+            </div>
+
+        </div>
+
     </div>
 
+    <div class="col-md-4 mb-4">
 
-    <div class="card">
-      <h2>Transfer Money</h2>
-      <p>Move funds between accounts.</p>
-      <button routerLink="/transfers">
-        Transfer
-      </button>
+        <div class="card action-card shadow">
+
+            <div class="card-body text-center">
+
+                <div class="action-icon">💸</div>
+
+                <h4>Transfer Money</h4>
+
+                <p>Move funds between accounts.</p>
+
+                <a routerLink="/transfers"
+                   class="btn btn-success">
+                    Go
+                </a>
+
+            </div>
+
+        </div>
+
     </div>
 
+    <div class="col-md-4 mb-4">
 
-    <div class="card">
-      <h2>Transactions</h2>
-      <p>Review your transaction history.</p>
-      <button routerLink="/transactions">
-        View History
-      </button>
+        <div class="card action-card shadow">
+
+            <div class="card-body text-center">
+
+                <div class="action-icon">📄</div>
+
+                <h4>Transactions</h4>
+
+                <p>Review your transaction history.</p>
+
+                <a routerLink="/transactions"
+                   class="btn btn-dark">
+                    Go
+                </a>
+
+            </div>
+
+        </div>
+
     </div>
-
-  </section>
 
 </div>
