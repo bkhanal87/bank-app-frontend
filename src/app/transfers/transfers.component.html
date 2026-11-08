@@ -1,1 +1,124 @@
-<p>transfers works!</p>
+<div class="container mt-4">
+
+  <h2 class="mb-4">Transfer Money</h2>
+
+  <div *ngIf="successMessage" class="alert alert-success">
+    {{ successMessage }}
+  </div>
+
+  <div *ngIf="errorMessage" class="alert alert-danger">
+    {{ errorMessage }}
+  </div>
+
+  <div *ngIf="loadingAccounts" class="alert alert-info">
+    Loading accounts...
+  </div>
+
+  <div class="card shadow" *ngIf="!loadingAccounts && accounts.length > 0">
+    <div class="card-body">
+
+      <form #transferForm="ngForm" (ngSubmit)="submitTransfer()">
+
+        <!-- From Account -->
+        <div class="mb-3">
+          <label class="form-label">From Account</label>
+
+          <select
+            class="form-select"
+            name="fromAccountId"
+            [(ngModel)]="transfer.fromAccountId"
+            required>
+
+            <option [ngValue]="0" disabled>
+              Select source account
+            </option>
+
+            <option
+              *ngFor="let account of accounts"
+              [ngValue]="account.id">
+
+              {{ account.accountType }} -
+              {{ account.accountNumber }} -
+              {{ account.balance | currency:'USD' }}
+
+            </option>
+          </select>
+        </div>
+
+        <!-- To Account -->
+        <div class="mb-3">
+          <label class="form-label">To Account</label>
+
+          <select
+            class="form-select"
+            name="toAccountId"
+            [(ngModel)]="transfer.toAccountId"
+            required>
+
+            <option [ngValue]="0" disabled>
+              Select destination account
+            </option>
+
+            <option
+              *ngFor="let account of accounts"
+              [ngValue]="account.id"
+              [disabled]="account.id === transfer.fromAccountId">
+
+              {{ account.accountType }} -
+              {{ account.accountNumber }} -
+              {{ account.balance | currency:'USD' }}
+
+            </option>
+          </select>
+        </div>
+
+        <!-- Amount -->
+        <div class="mb-3">
+          <label class="form-label">Transfer Amount ($)</label>
+
+          <input
+            type="number"
+            class="form-control"
+            name="amount"
+            [(ngModel)]="transfer.amount"
+            min="0.01"
+            step="0.01"
+            required>
+        </div>
+
+        <!-- Description -->
+        <div class="mb-3">
+          <label class="form-label">Description</label>
+
+          <input
+            type="text"
+            class="form-control"
+            name="description"
+            [(ngModel)]="transfer.description"
+            placeholder="Example: Monthly savings"
+            required>
+        </div>
+
+        <button
+          type="submit"
+          class="btn btn-primary"
+          [disabled]="transferForm.invalid || submitting">
+
+          {{ submitting ? 'Processing...' : 'Submit Transfer' }}
+
+        </button>
+
+      </form>
+
+    </div>
+  </div>
+
+  <div
+    *ngIf="!loadingAccounts && accounts.length === 0"
+    class="alert alert-warning">
+
+    No accounts are available for transfers.
+
+  </div>
+
+</div>

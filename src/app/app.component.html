@@ -1,17 +1,16 @@
 <!-- add header -->
-<app-navbar></app-navbar>
+<div class="app-layout">
 
+  <app-navbar></app-navbar>
 
-<div class="container mt-4">
+  <main class="main-content">
+    <div class="container mt-4">
+      <router-outlet></router-outlet>
+    </div>
+  </main>
 
-    <router-outlet></router-outlet>
+  <footer class="footer text-center">
+    <p>© 2026 MyBank. All rights reserved.</p>
+  </footer>
 
 </div>
-
-<footer class="footer text-center mt-5 mb-3">
-
-    <p>@ 2026 MyBank. All rights reserved.</p>
-
-
-</footer>
-

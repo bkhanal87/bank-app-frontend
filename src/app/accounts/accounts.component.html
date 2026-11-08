@@ -1,1 +1,55 @@
-<p>accounts works!</p>
+
+<h2 class="mb-4">My Accounts</h2>
+
+<!-- Loading message -->
+<div *ngIf="loading" class="alert alert-info">
+    Loading your accounts...
+</div>
+
+<!-- Error message -->
+<div *ngIf="errorMessage" class="alert alert-danger">
+    {{ errorMessage }}
+    <button class="btn btn-sm btn-outline-danger ms-3"
+            (click)="loadAccounts()">
+        Try Again
+    </button>
+</div>
+
+<!-- Empty account list -->
+<div *ngIf="!loading && !errorMessage && accounts.length === 0"
+     class="alert alert-secondary">
+    No accounts found.
+</div>
+
+<!-- Account cards -->
+<div class="row" *ngIf="!loading && accounts.length > 0">
+
+    <div class="col-md-4 mb-4"
+         *ngFor="let account of accounts">
+
+        <div class="card shadow h-100">
+            <div class="card-body">
+
+                <h4 class="card-title">
+                    {{ account.accountType }}
+                </h4>
+
+                <p class="text-muted mb-2">
+                    Account Number:
+                    {{ account.accountNumber }}
+                </p>
+
+                <hr>
+
+                <p class="mb-1">Available Balance</p>
+
+                <h3 class="text-success">
+                    {{ account.balance | currency:'USD':'symbol':'1.2-2' }}
+                </h3>
+
+            </div>
+        </div>
+
+    </div>
+
+</div>

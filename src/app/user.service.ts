@@ -31,7 +31,7 @@ export class UserService {
     return this.httpClient.get<User>(`${this.baseUrl}/${id}`);
   }
   // delete method to deleter user
-  deleteUser(id:number) : Observable<Object>{
-    return this.httpClient.delete(`${this.baseUrl}/${id}`);
+  deleteUser(id:number) : Observable<string>{
+    return this.httpClient.delete(`${this.baseUrl}/${id}`, { responseType: 'text' });
   }
 }

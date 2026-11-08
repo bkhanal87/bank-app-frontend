@@ -13,6 +13,8 @@ export class CreateUserComponent implements OnInit{
   // here, we need to create a user from a User class we'd created initially
   user: User = new User();
 
+  isSubmitting = false;
+
   constructor(private userService: UserService, private router: Router)
    {}
 
@@ -21,12 +23,13 @@ export class CreateUserComponent implements OnInit{
   }
 
   saveUser() {
-    this.userService.createUser(this.user).subscribe(data => {
-      console.log(data);
+    this.userService.createUser(this.user).subscribe({next: (data) => {
+      this.isSubmitting = false;
       this.navigateToUserList();
-    },
-    error => console.log(error));
-    
+    }, error: (error) => {
+      this.isSubmitting = false;
+      console.log(error);
+    }});
   }
 
   navigateToUserList() {
@@ -34,7 +37,12 @@ export class CreateUserComponent implements OnInit{
   }
 
   onSubmit() {
+    if (this.isSubmitting) {
+      return; // Prevent multiple submissions
+    }
+    this.isSubmitting = true;
     console.log(this.user);
     this.saveUser();
   }
-}
+
+ }
