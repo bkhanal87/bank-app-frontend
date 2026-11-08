@@ -1,82 +1,198 @@
-<div class="hero">
+<div class="dashboard">
 
-    <h1>Welcome to MyBank</h1>
+  <!-- Welcome Header -->
+  <div class="dashboard-header">
+    <div>
+      <p class="welcome-label">MYBANK DASHBOARD</p>
+      <h1>Welcome to MyBank</h1>
+      <p class="lead">
+        Here's an overview of your finances.
+      </p>
+    </div>
 
-    <p class="lead">
-        Securely manage your finances.
-    </p>
+    <a routerLink="/transfers" class="btn btn-primary">
+      + New Transfer
+    </a>
+  </div>
 
-</div>
+  <!-- Error Message -->
+  <div *ngIf="errorMessage" class="alert alert-danger">
+    {{ errorMessage }}
 
-<div class="row">
+    <button
+      class="btn btn-sm btn-outline-danger ms-3"
+      (click)="loadDashboard()">
+      Try Again
+    </button>
+  </div>
 
-    <div class="col-md-4 mb-4">
+  <!-- Loading -->
+  <div *ngIf="loading" class="alert alert-info">
+    Loading your dashboard...
+  </div>
 
-        <div class="card action-card shadow">
+  <div *ngIf="!loading">
 
-            <div class="card-body text-center">
+    <!-- Total Balance -->
+    <div class="balance-card shadow-sm mb-4">
 
-                <div class="action-icon">💰</div>
+      <div>
+        <p class="balance-label">Total Account Balance</p>
 
-                <h4>Check Balance</h4>
+        <h2>
+          {{ totalBalance | currency:'USD':'symbol':'1.2-2' }}
+        </h2>
 
-                <p>View your account balances.</p>
+        <p class="balance-description">
+          Across {{ accounts.length }} accounts
+        </p>
+      </div>
 
-                <a routerLink="/accounts"
-                   class="btn btn-primary">
-                    Go
-                </a>
-
-            </div>
-
-        </div>
+      <div class="balance-icon">
+        💳
+      </div>
 
     </div>
 
-    <div class="col-md-4 mb-4">
+    <!-- My Accounts -->
+    <div class="section-heading">
+      <div>
+        <h3>My Accounts</h3>
+        <p>Your current account balances</p>
+      </div>
 
-        <div class="card action-card shadow">
+      <a routerLink="/accounts" class="view-link">
+        View All
+      </a>
+    </div>
 
-            <div class="card-body text-center">
+    <div class="row">
 
-                <div class="action-icon">💸</div>
+      <div
+        class="col-lg-4 col-md-6 mb-3"
+        *ngFor="let account of accounts">
 
-                <h4>Transfer Money</h4>
+        <div class="account-card shadow-sm h-100">
 
-                <p>Move funds between accounts.</p>
+          <div class="account-card-top">
+            <div class="account-icon">🏦</div>
 
-                <a routerLink="/transfers"
-                   class="btn btn-success">
-                    Go
-                </a>
+            <span class="account-status">
+              Active
+            </span>
+          </div>
 
-            </div>
+          <h5>{{ account.accountType }}</h5>
+
+          <p class="account-number">
+            Account Number: {{ account.accountNumber }}
+          </p>
+
+          <p class="account-balance">
+            {{ account.balance | currency:'USD':'symbol':'1.2-2' }}
+          </p>
 
         </div>
 
+      </div>
+
     </div>
 
-    <div class="col-md-4 mb-4">
+    <!-- Quick Actions -->
+    <div class="section-heading mt-4">
+      <div>
+        <h3>Quick Actions</h3>
+        <p>Manage your money</p>
+      </div>
+    </div>
 
-        <div class="card action-card shadow">
+    <div class="row">
 
-            <div class="card-body text-center">
+      <div class="col-md-4 mb-3">
+        <a routerLink="/accounts" class="action-card">
+          <div class="action-icon">💰</div>
+          <h5>Check Balance</h5>
+          <p>View your account balances.</p>
+          <span>View Accounts →</span>
+        </a>
+      </div>
 
-                <div class="action-icon">📄</div>
+      <div class="col-md-4 mb-3">
+        <a routerLink="/transfers" class="action-card">
+          <div class="action-icon">💸</div>
+          <h5>Transfer Money</h5>
+          <p>Move funds between accounts.</p>
+          <span>Make a Transfer →</span>
+        </a>
+      </div>
 
-                <h4>Transactions</h4>
+      <div class="col-md-4 mb-3">
+        <a routerLink="/transactions" class="action-card">
+          <div class="action-icon">📄</div>
+          <h5>Transactions</h5>
+          <p>Review your transaction history.</p>
+          <span>View Transactions →</span>
+        </a>
+      </div>
 
-                <p>Review your transaction history.</p>
+    </div>
 
-                <a routerLink="/transactions"
-                   class="btn btn-dark">
-                    Go
-                </a>
+    <!-- Recent Transactions -->
+    <div class="section-heading mt-4">
+      <div>
+        <h3>Recent Transactions</h3>
+        <p>Your latest account activity</p>
+      </div>
 
-            </div>
+      <a routerLink="/transactions" class="view-link">
+        View All
+      </a>
+    </div>
+
+    <div class="recent-transactions shadow-sm">
+
+      <!-- Empty State -->
+      <div
+        *ngIf="transactions.length === 0"
+        class="empty-transactions">
+
+        No transactions found.
+
+      </div>
+
+      <!-- Transaction Rows -->
+      <div
+        class="transaction-row"
+        *ngFor="let transaction of transactions">
+
+        <div class="transaction-icon">
+          {{ transaction.amount >= 0 ? '↓' : '↑' }}
+        </div>
+
+        <div class="transaction-details">
+
+          <h6>{{ transaction.description }}</h6>
+
+          <p>
+            {{ transaction.date | date:'MMM d, y, h:mm a' }}
+            · Account {{ getAccountNumber(transaction.accountId) }}
+          </p>
 
         </div>
 
+        <div
+          class="transaction-amount"
+          [class.money-in]="transaction.amount > 0"
+          [class.money-out]="transaction.amount < 0">
+
+          {{ transaction.amount | currency:'USD':'symbol':'1.2-2' }}
+
+        </div>
+
+      </div>
+
     </div>
+
+  </div>
 
 </div>

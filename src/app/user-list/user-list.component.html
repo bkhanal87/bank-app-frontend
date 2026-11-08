@@ -19,7 +19,7 @@
         <button (click)="updateUser(user.id)" class="btn btn-primary">
           Update
         </button>
-        <button (click)="deleteUser(user.id)" class="btn btn-primary" style="margin-left:10px">
+        <button [routerLink]="['/delete-user', user.id]" class="btn btn-danger" style="margin-left:10px">
           Delete
         </button>
         <button (click)="userDetails(user.id)" class="btn btn-primary" style="margin-left:10px">

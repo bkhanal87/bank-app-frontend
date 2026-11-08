@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { User } from '../user';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { UserService } from '../user.service';
 
 
@@ -15,24 +15,41 @@ export class DeleteUserComponent implements OnInit {
 
   constructor(
     private userService: UserService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
-    this.id = this.route.snapshot.params['id'];
+    this.id = Number(this.route.snapshot.params['id']);
 
-    this.userService.getUserById(this.id).subscribe(
-      (data) => {
-        console.log(data);
+    this.userService.getUserById(this.id).subscribe({
+      next: (data) => {
+        this.user = data;;
       },
-      (error) => console.log(error)
-    );
+      error: (error) => console.error(error)
+  });
   }
-  onSubmit() {
-    this.userService.deleteUser(this.id).subscribe
-      (data => {
-        console.log(data);
-      },
-      error => console.log(error));
+
+  onSubmit(): void {
+    const confirmed = window.confirm(
+      'Are you sure you want to delete this user?');
+    if (!confirmed) {
+      return;
+    }
+
+    this.userService.deleteUser(this.id).subscribe({
+        next: (response) => {
+          alert('User deleted successfully.');
+          this.navigateToUserList();
+        },
+        error: (error) => {
+          console.error('Delete failed:', error);
+          alert('Unable to delete user. Please try again later.');
+        }
+      });
+    }
+    navigateToUserList(): void {
+      this.router.navigate(['/users']);
+    }
   }
-}
+
